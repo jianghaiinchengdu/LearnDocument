@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.0.js">
+			
+		</script>
+	</head>
+
+	<body>
+		<!--<strong>qwreetr</strong>
+		<br />
+		<b>
+			qwreetr
+			<div id="showFrame">
+				<a>1</a>
+				<a>1</a>
+				<a>1</a>
+			</div>
+		</b>
+		<p>qwreetr</p>
+
+		<span id="span1">
+		</span>
+		<span id="span2">
+		</span>-->
+
+		<div id="frame1">
+			<!--<div id="frame2">-->
+				<div id="frame3">
+
+				<!--</div>-->
+			</div>
+		</div>
+		<!--<div id="test">
+
+		</div>-->
+
+		<!--<div id="float1"></div>
+		<div id="float2"></div>
+
+		<div id="float3"></div>
+
+		<p>background-color: cornflowerblue; background-color: cornflowerblue; background-color: cornflowerblue; background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color:
+			cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color:
+			cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color:
+			cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;background-color: cornflowerblue;</p>
+		<input id="textField" type="text" />-->
+	</body>
+	<script>
+		$('#float1').bind('mouseenter',xx)
+		function xx(){
+			alert('1222')
+			$('div').wrapAll('<span></span>')
+			
+//			$('#textField').css('background-color',yellow)
+		}
+	</script>
+	<style type="text/css">
+		#float1 {
+			background-color: cornflowerblue;
+			width: 300px;
+			height: 300px;
+			/*float: left;*/
+		}
+		
+		#float2 {
+			background-color: aquamarine;
+			width: 200px;
+			height: 100px;
+			/*float: left;*/
+		}
+		
+		#float3 {
+			background-color: salmon;
+			width: 200px;
+			height: 200px;
+			float: left;
+		}
+		
+		#frame1 {
+			background-color: red;
+			width: 300px;
+			height: 300px;
+			left: 100px;
+			position: absolute;
+		}
+		
+		#frame2 {
+			background-color: darkgreen;
+			width: 200px;
+			height: 200px;
+			left: 100px;
+			position: fixed;
+		}
+		
+		#frame3 {
+			background-color: goldenrod;
+			width: 100px;
+			height: 100px;
+			left: 0px;
+			position: relative;
+		}
+		
+		#test {
+			color: red;
+			margin: 20px;
+			padding: 20px;
+			width: 40px;
+			height: 40px;
+			/*background-color: #8A6DE9;*/
+			border-width: 2px;
+			border-style: solid;
+			border-color: red;
+		}
+		
+		b {
+			display: inline-block;
+			background-color: #2AC845;
+			width: 100px;
+			height: 60px;
+			line-height: 60px;
+			text-align: center;
+		}
+		
+		a {
+			display: none;
+			background-color: #8B0000;
+			border: dotted 1px salmon;
+		}
+		
+		b:hover {
+			/*background-color: #6641E2;*/
+		}
+		
+		b:hover div a {
+			display: block;
+		}
+		
+		body>span {
+			left: 50%;
+			width: 50px;
+			height: 30px;
+			display: block;
+			background-color: red;
+			resize: both;
+			overflow: auto;
+		}
+		
+		span+span {
+			display: inline-block;
+			margin: 10px;
+			background-color: green;
+			width: 50px;
+			height: 30px;
+			transition-duration: 2s;
+			/*transition-property: width;*/
+			transition-timing-function: ease-out;
+			resize: both;
+			overflow: auto;
+		}
+		
+		#span1 {
+			position: absolute;
+			left: 200px;
+		}
+		
+		span+span:hover {
+			width: 200px;
+			height: 200px;
+			background-color: red;
+		}
+		div+p{
+			clear: left;
+		}
+		body{
+			border-width: 2px;
+			border-color: black;
+		}
+		span{
+			width: 10px;
+			height: 10px;
+		}
+	</style>
+
+</html>

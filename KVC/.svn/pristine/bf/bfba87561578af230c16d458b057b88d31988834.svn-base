@@ -1,0 +1,76 @@
+//
+//  ViewController.m
+//  KVCDemo
+//
+//  Created by jianghai on 15/10/21.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+#import "ViewController.h"
+#import "CustomModel.h"
+#import "TestModel.h"
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    NSMutableArray* arr = [NSMutableArray array];
+    for (int i = 0; i != 10; i++) {
+        BaseClass* aClass1 = [[BaseClass alloc] init];
+        aClass1.classID = [NSString stringWithFormat:@"this is Base Class %d",i/2];
+        aClass1.valueCount = 45;
+        [arr addObject:aClass1];
+    }
+    
+    CustomModel* model = [[CustomModel alloc] init];
+    [model setValue:arr forKey:@"userList"];
+    model.wholeArray = [NSMutableArray arrayWithCapacity:5];
+    
+    
+    NSNumber* num = [NSNumber numberWithFloat:2];
+    NSError* err;
+    
+    [model validateValue:&num forKey:@"count" error:&err];//默认实现会调用-(BOOL)validate<Key>:error:方法
+    [model setValue:num forKey:@"count"];
+    [model setValue:0 forKey:@"hidden"];
+    [model setValue:num forKey:@"aClass"];
+    [model setValue:num forKey:@"wholeArray"];
+//    [model setValue:num forKey:@"userList"];
+    
+    
+    //点语法
+    NSMutableArray* aa = [model valueForKey:@"userList"];
+    NSLog(@"%@",[aa lastObject]);
+    
+    TestModel *primes = [[TestModel alloc] init];
+    NSArray* s = [primes valueForKey:@"primes"];
+    NSLog(@"The last prime is %@", [s lastObject]);
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+//+(CustomModel*)testModel
+//{
+//    CustomModel* model = [[CustomModel alloc] init];
+//    model.hidden = NO;
+//    model.count = 100;
+//    BaseClass* aClass = [[BaseClass alloc] init];
+//    aClass.classID = @"this is Base Class";
+//    aClass.valueCount = 11;
+//    model.aClass = aClass;
+//    model.userList = [NSMutableArray array];
+//    for (int i = 0; i != 10; i++) {
+//        BaseClass* aClass1 = [[BaseClass alloc] init];
+//        aClass1.classID = [NSString stringWithFormat:@"this is Base Class %d",i/2];
+//        aClass1.valueCount = 45;
+//        [model.userList addObject:aClass1];
+//    }
+//    model.wholeArray = [NSMutableArray array];
+//    for (int i = 0; i != 5; i++) {
+//        [model.wholeArray addObject:model.userList];
+//    }
+//    return model;
+//}
+@end

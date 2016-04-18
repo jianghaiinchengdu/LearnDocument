@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.9.0.js">
+		</script>
+		<meta charset="UTF-8">
+		<script>
+			$(document).ready(function() {
+				$("button").click(function() {
+					alert('123123')
+					$.ajax({
+						url: "http://www.meilele.com/solr_api/solr-manage/catalog/",
+						dataType: 'jsonp',
+						//						jsonp: "callback",
+						//						data: { uid:3, datarow_need:5 },
+						type: 'post',
+						crossDomain: true,
+						success: function(responseTxt, statusTxt, xhr) {
+							alert(xhr);
+						},
+						error: function(jqXHR, textStatus, errorMsg) {
+							alert("请求失败：textStatus: " + textStatus + " errorMsg: " + errorMsg);
+						}
+					});
+				});
+			});
+		</script>
+	</head>
+
+	<body>
+
+		<button>向页面发送 HTTP POST 请求，并获得返回的结果</button>
+
+	</body>
+
+</html>

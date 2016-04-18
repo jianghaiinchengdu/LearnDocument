@@ -1,0 +1,75 @@
+//
+//  CustomModel.m
+//  KVCDemo
+//
+//  Created by jianghai on 15/10/21.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+#import "CustomModel.h"
+
+@implementation BaseClass
+@end
+
+@interface CustomModel()
+{
+    BOOL _hidden;
+}
+@end
+
+@implementation CustomModel
+@dynamic hidden;
+
++(CustomModel*)testModel
+{
+    CustomModel* model = [[CustomModel alloc] init];
+    model.hidden = NO;
+    model.count = 100;
+    BaseClass* aClass = [[BaseClass alloc] init];
+    aClass.classID = @"this is Base Class";
+    //    aClass.count = 45;
+    model.aClass = aClass;
+    model.userList = [NSMutableArray array];
+    for (int i = 0; i != 10; i++) {
+        BaseClass* aClass1 = [[BaseClass alloc] init];
+        aClass1.classID = [NSString stringWithFormat:@"this is Base Class %d",i/2];
+        //        aClass1.count = 45;
+        [model.userList addObject:aClass1];
+    }
+    model.wholeArray = [NSMutableArray array];
+    for (int i = 0; i != 5; i++) {
+        [model.wholeArray addObject:model.userList];
+    }
+    return model;
+}
+-(BOOL)validateXnum:(id*)inValue error:(out NSError * _Nullable __autoreleasing *)outError
+{
+    if(*inValue == nil)
+        return YES;
+    
+    if([*inValue floatValue] < 1){
+        
+        NSNumber* num = [NSNumber numberWithFloat:1];
+        if(num){
+            *inValue = num;
+            return YES;
+        }
+        if(outError != NULL){
+            NSString* errorStr = @"errooooo";
+            NSDictionary* userinfo = @{NSLocalizedDescriptionKey:errorStr};
+            NSError* err = [[NSError alloc] initWithDomain:@"PERSON_ERROR_DOMAIN" code:1 userInfo:userinfo];
+            *outError = err;
+        }
+        return NO;
+    }
+    return YES;
+}
+-(void)setHidden:(BOOL)hidden
+{
+    _hidden = hidden;
+}
+//-(float)xnum
+//{
+//    return _hidden;
+//}
+@end

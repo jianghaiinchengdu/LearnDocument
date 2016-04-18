@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="UTF-8">
+		
+			mui.init({
+				subpages: [{
+					url: 'new_drag.html', //下拉刷新内容页面地址
+					id: 'new_drag.html', //内容页面标志
+					styles: {
+						top: '44px',
+						bottom: '300px',
+					}
+				}],
+				preloadPages:[{
+					url: 'dropView.html', //下拉刷新内容页面地址
+					id: 'dropView.html', //内容页面标志
+					styles: {
+						top: '44px',
+						bottom: '300px',
+					}
+				}]
+			});
+			mui.plusReady(function(){
+				plus.webview.currentWebview().id = "home"
+				window.addEventListener("jianghai",function(){
+			alert("recive custom event")
+		})
+			})
+		</script>
+	</head>
+
+	<body>
+		<nav class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">aha</h1>
+		</nav>
+		
+		
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item" href="examples/actionsheet.html">
+				<span class="mui-icon mui-icon-phone"></span>
+				<span class="mui-tab-label">分类</span>
+			</a>
+			<a class="mui-tab-item" href="examples/ad.html">
+				<span class="mui-icon mui-icon-email"></span>
+				<span class="mui-tab-label">样板间</span>
+			</a>
+			<a class="mui-tab-item" href="examples/buttons-with-block.html">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">我</span>
+			</a>
+		</nav>
+	</body>
+
+</html>

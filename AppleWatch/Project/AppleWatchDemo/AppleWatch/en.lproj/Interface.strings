@@ -1,0 +1,66 @@
+
+/* Class = "WKInterfaceLabel"; text = "20"; ObjectID = "04C-o3-0Jo"; */
+"04C-o3-0Jo.text" = "20";
+
+/* Class = "WKInterfaceLabel"; text = "最低："; ObjectID = "1ab-9z-gWD"; */
+"1ab-9z-gWD.text" = "最低：";
+
+/* Class = "WKInterfaceLabel"; text = "20"; ObjectID = "4mq-qT-pFL"; */
+"4mq-qT-pFL.text" = "20";
+
+/* Class = "WKInterfaceLabel"; text = "20"; ObjectID = "5v2-Z0-1J0"; */
+"5v2-Z0-1J0.text" = "20";
+
+/* Class = "WKInterfaceLabel"; text = "最低："; ObjectID = "63h-Hb-e42"; */
+"63h-Hb-e42.text" = "最低：";
+
+/* Class = "WKInterfaceController"; title = "北京"; ObjectID = "AUv-5t-HM4"; */
+"AUv-5t-HM4.title" = "北京";
+
+/* Class = "WKInterfaceLabel"; text = "20"; ObjectID = "ByW-3i-VkD"; */
+"ByW-3i-VkD.text" = "20";
+
+/* Class = "WKInterfaceLabel"; text = "20"; ObjectID = "E5Y-ty-8e4"; */
+"E5Y-ty-8e4.text" = "20";
+
+/* Class = "WKInterfaceController"; title = "成都"; ObjectID = "Pmf-Ek-CUe"; */
+"Pmf-Ek-CUe.title" = "成都";
+
+/* Class = "WKInterfaceLabel"; text = "20"; ObjectID = "Q9j-xD-yK0"; */
+"Q9j-xD-yK0.text" = "20";
+
+/* Class = "WKInterfaceLabel"; text = "20"; ObjectID = "Rmg-km-blD"; */
+"Rmg-km-blD.text" = "20";
+
+/* Class = "WKInterfaceLabel"; text = "最低："; ObjectID = "Sx1-Wf-DSy"; */
+"Sx1-Wf-DSy.text" = "最低：";
+
+/* Class = "WKInterfaceLabel"; text = "Alert Label"; ObjectID = "XkS-y5-khE"; */
+"XkS-y5-khE.text" = "Alert Label";
+
+/* Class = "WKInterfaceLabel"; text = "最高："; ObjectID = "XzM-gf-nc9"; */
+"XzM-gf-nc9.text" = "最高：";
+
+/* Class = "WKInterfaceLabel"; text = "最高："; ObjectID = "buA-E6-PUt"; */
+"buA-E6-PUt.text" = "最高：";
+
+/* Class = "WKInterfaceLabel"; text = "20"; ObjectID = "gVQ-o0-u5I"; */
+"gVQ-o0-u5I.text" = "20";
+
+/* Class = "WKInterfaceLabel"; text = "最高："; ObjectID = "k2p-lA-rwI"; */
+"k2p-lA-rwI.text" = "最高：";
+
+/* Class = "WKInterfaceLabel"; text = "最高："; ObjectID = "rD7-24-jya"; */
+"rD7-24-jya.text" = "最高：";
+
+/* Class = "WKInterfaceLabel"; text = "New Message"; ObjectID = "vd1-5D-fSp"; */
+"vd1-5D-fSp.text" = "New Message";
+
+/* Class = "WKInterfaceLabel"; text = "最低："; ObjectID = "vqk-04-QNN"; */
+"vqk-04-QNN.text" = "最低：";
+
+/* Class = "WKInterfaceController"; title = "南京"; ObjectID = "xaE-2o-agE"; */
+"xaE-2o-agE.title" = "南京";
+
+/* Class = "WKInterfaceController"; title = "上海"; ObjectID = "zOY-e1-Sxn"; */
+"zOY-e1-Sxn.title" = "上海";

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+
+		<script src="js/mllbasenetwork.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="UTF-8">
+			mui.init();
+
+			function cli() {
+				//				var webcontainerpage = plus.webview.getWebviewById('fire1.html');
+				//				alert("fdsafdsfdsf");
+				//				mui.fire(webcontainerpage,'XXevent')
+				basenetwork.post('http://www.meilele.com/solr_api/solr-manage/catalog/', null, true, 10000, function(data) {
+					alert('success')
+					categorydata = data['categorySortMap']
+					for (var item in categorydata.jiaju) {
+						document.getElementById('list-category-container').innerHTML +=
+							'<li id=' + 'jiaju' + '|' + item + ' class="mui-table-view-cell">' + categorydata.jiaju[item].parentCat.cat_name + '</li>'
+					}
+					for (var item in categorydata.jiancai) {
+						document.getElementById('list-category-container').innerHTML +=
+							'<li id=' + 'jiancai' + '|' + item + ' class="mui-table-view-cell">' + categorydata.jiancai[item].parentCat.cat_name + '</li>'
+					}
+					for (var item in categorydata.zhuangshi) {
+						document.getElementById('list-category-container').innerHTML +=
+							'<li id=' + 'zhuangshi' + '|' + item + ' class="mui-table-view-cell">' + categorydata.zhuangshi[item].parentCat.cat_name + '</li>'
+					}
+					successBlock();
+				}, function(xhr, type, errorThrown) {
+					//异常处理；
+					alert(type)
+				})
+			}
+		</script>
+	</head>
+
+	<body>
+		<button onclick="cli()" id="sendId" type="button" class="mui-badge-warning" style="margin: 50px; width: 100px; height: 50px;">Send</button>
+	</body>
+
+</html>

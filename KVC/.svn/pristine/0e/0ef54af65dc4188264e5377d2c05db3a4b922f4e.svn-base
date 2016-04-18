@@ -1,0 +1,39 @@
+//
+//  ViewController.m
+//  KVCDemo
+//
+//  Created by jianghai on 15/10/21.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+#import "ViewController.h"
+#import "CustomModel.h"
+
+@implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    CustomModel* model = [CustomModel testModel];
+    NSArray* a = [model valueForKeyPath:@"wholeArray.@unionOfArrays.classID"];
+    
+//    [model setValue:nil forKey:@"count"];
+//    NSLog(@"%@",[model valueForKeyPath:@"userList.count"]);
+//    [model countOfUserList];
+    
+//    BOOL a = [model valueForKey:@"hidden"];
+//    NSError* error;
+//    NSNumber* num = [NSNumber numberWithFloat:0];
+//    [model validateValue:&num forKey:@"xnum" error:&error];
+//    [model objectInUserListAtIndex:2];
+//    [model insertObject:[BaseClass new] inUserListAtIndex:5];
+    [self collectionTest];
+}
+
+-(void)collectionTest
+{
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+@end

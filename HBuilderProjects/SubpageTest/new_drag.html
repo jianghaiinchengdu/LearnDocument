@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script type="text/javascript" charset="UTF-8">
+			mui.init({
+				pullRefresh: {
+					container: "#refreshContainer",
+					down: {
+						contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+						callback: pullupRefresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器取新数据；
+					}
+				}
+			});
+
+			function pullupRefresh() {
+				setTimeout(function() {
+					for (var i = 0; i < 10; i++) {
+						document.getElementById('12w').innerHTML += '<li class="mui-table-view-cell">11</li>'
+					}
+					mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+				}, 1500);
+			}
+			mui.ready(function() {
+				mui('#refreshContainer').pullRefresh().pulldownLoading();
+			})
+		</script>
+	</head>
+
+	<body>
+
+		<div id="refreshContainer" class="mui-content mui-scroll-wrapper div-list">
+			<div class="mui-scroll">
+				<div id='12w' class="mui-table-view">
+				</div>
+			</div>
+		</div>
+		<script>
+			mui.plusReady(function() {
+				mui('.mui-btn-warning').on('tap', 'p', function() {
+					mui.fire(plus.webview.getWebviewById("home"), "jianghai")
+				})
+			})
+		</script>
+	</body>
+
+</html>

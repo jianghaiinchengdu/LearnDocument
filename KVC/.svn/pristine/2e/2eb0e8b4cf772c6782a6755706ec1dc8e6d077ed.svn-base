@@ -1,0 +1,30 @@
+//
+//  CustomModel.h
+//  KVCDemo
+//
+//  Created by jianghai on 15/10/21.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface BaseClass : NSObject
+@property (nonatomic,copy)NSString* classID;
+//@property (nonatomic,assign)int count;
+@end
+
+@interface CustomModel : NSObject
+@property (nonatomic,assign)BOOL hidden;
+@property (nonatomic,assign)float xnum;
+
+@property (nonatomic,assign)NSInteger count;
+@property (nonatomic,strong)BaseClass* aClass;
+@property (nonatomic,strong)NSMutableArray<BaseClass*>* userList;
+@property (nonatomic,strong)NSMutableArray *wholeArray;
+
+//-(NSUInteger)countOfUserList;
+//-(id)objectInUserListAtIndex:(NSUInteger)index;
+//-(void)insertObject:(BaseClass *)object inUserListAtIndex:(NSUInteger)index;
+
++(CustomModel*)testModel;
+@end

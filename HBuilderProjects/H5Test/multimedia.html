@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<script>
+		function playVideo() {
+			alert("1")
+			var vedio = document.getElementsByTagName('audio')[0]
+			vedio.play()
+		}
+	</script>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<video width="300" height="200" src="http://www.tutorialspoint.com/html5/foo.mp4" controls></video>
+			<audio src="img/小幸运 - 田馥甄.mp3" controls>a</audio>
+			<input type="button" title="播放" onclick="playVideo()" />
+	</body>
+
+</html>

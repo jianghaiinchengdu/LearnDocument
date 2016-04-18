@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="bootstrap-3.3.5/css/bootstrap-theme.min.css" />
+		<link rel="stylesheet" href="bootstrap-3.3.5/css/bootstrap.min.css" />
+		<script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+		<script type="text/javascript" src="bootstrap-3.3.5/js/bootstrap.min.js"></script>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title></title>
+	</head>
+
+	<body>
+		<div class="container">
+
+			<div class="row ">
+				<div id="guessyoulikeheader" class="col-sm-12 col-xs-12">
+					<img src="img/home-page_icon_guess-you-like.jpg" />
+					<p>猜你喜欢</p>
+				</div>
+			</div>
+			<div id="guessyoulikeContainer" class="row">
+
+			</div>
+
+			<button type="button" id="lodeMoreData" class="col-sm-4 col-sm-push-4 col-xs-4 col-xs-push-4">
+				加载更多
+			</button>
+			<br />
+			<br />
+
+			<li>XXXXX</li>
+			<li>XXXXX</li>
+			<li>XXXXX</li>
+
+		</div>
+	</body>
+	<style>
+		li {
+			display: table-cell;
+		}
+		
+		body {
+			background-color: lightgray;
+		}
+		
+		#lodeMoreData {
+			
+		}
+		#class{
+			background-color: red;
+		}
+		#guessyoulikeheader,
+		#guessyoulikeContainer {
+			background-color: white;
+		}
+		
+		#guessyoulikeheader > img {
+			display: inline-block;
+		}
+		
+		#guessyoulikeheader > p {
+			display: inline-block;
+			line-height: 64px;
+			font-weight: 850;
+		}
+		
+		.guesslikeitem {
+			/*text-align: center;*/
+		}
+		
+		.goodsdescription {
+			height: 30px;
+			line-height: 20px;
+			left: 50%;
+		}
+		
+		.goodprice {
+			display: inline-block;
+			color: red;
+			font-size: 15px;
+		}
+		
+		.goodsSaleCount {
+			display: inline-block;
+			color: lightgray;
+			font-size: 15px;
+			margin-left: 5px;
+			font-weight: 600;
+		}
+	</style>
+	<script>
+		$(document).ready(function() {
+			$("#lodeMoreData").bind('click', function() {
+				$('#lodeMoreData').css('display', 'none')
+				$.ajax({
+					url: "http://www.meilele.com/app",
+					dataType: 'jsonp',
+					data: {
+						is_null: "is_null",
+						startPage: currentPage,
+						pageSize: 2
+					},
+					type: 'get',
+					crossDomain: true,
+					success: function(data, statusTxt, xhr) {
+						if (currentPage == parseInt(data.page_info.totalpage))
+							hasNextPage = false
+						currentPage++
+						guessYouLikeData.push(data.rows)
+						configGuessYouLikeUI(data.rows) //配置数据
+						if (hasNextPage)
+							$('#lodeMoreData').css('display', 'inline')
+					},
+					error: function(jqXHR, textStatus, errorMsg) {
+						alert("请求失败：textStatus: " + textStatus + " errorMsg: " + errorMsg);
+					}
+				});
+			})
+		});
+		var guessYouLikeData = []
+		var currentPage = 1
+		var hasNextPage = true
+
+		function formatTemplate(dta, tmpl) {
+			var format = {
+				name: function(x) {
+					return x
+				}
+			};
+			return tmpl.replace(/{(\w+)}/g, function(m1, m2) {
+				if (!m2)
+					return "";
+				return (format && format[m2]) ? format[m2](dta[m2]) : dta[m2];
+			});
+		}
+
+		function configGuessYouLikeUI(newdata) {
+			var html = $('#template_1').html()
+			var arr = []
+			$.each(newdata, function(index, element) {
+				arr.push(formatTemplate(element, html))
+			})
+			$('#guessyoulikeContainer').append(arr.join(''))
+		}
+	</script>
+	<script type="text/template" id="template_1">
+		<div class='col-sm-6 col-xs-6 guesslikeitem'>
+			<img class='img-responsive' src='http://image.meilele.com/{goods_thumb__2}' />
+			<p class='goodsdescription'>{goods_name}</p>
+			<p class='goodprice'>{goods_price}</p>
+			<p class='goodsSaleCount'>已售:{goods_total_sale}</p>
+		</div>
+
+	</script>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div name='log1' ondragstart="return dragstart(event)" draggable="true" id="log1" style="margin: 50px; layout-flow: inherit; background-color: blue; width: 100px; height: 100px;">
+
+		</div>
+		<div id="log2" name='log2' ondragenter="return dragEnter(event)" ondragover="return dragOver(event)" ondrop="return dragEnd(event)" style="margin: 50px; layout-flow: inherit; background-color: rosybrown; width: 100px; height: 100px;">
+			<h1 align="center">L</h1>
+		</div>
+		<input onclick="locatedMe()" type="button" title="XX" value="XX" style="margin: 50px; width: 100px; height: 50px; background-color: brown; border-radius: 5px;" />
+		<input onclick="download()" type="button" value="下载" style="margin: 50px; width: 100px; height: 50px; background-color: brown; border-radius: 5px;" />
+		<script>
+		function download(){
+			var worker = new Worker('download.js')
+			worker.onmessage = function(event){
+				alert(event.data)
+			}
+		}
+			//定位
+			function locatedMe() {
+				alert("1");
+				var geolocation = navigator.geolocation;
+				geolocation.getCurrentPosition(alertLocation, errHa);
+			}
+
+			function alertLocation(pos) {
+				alert(pos.coords.latitude);
+				document.getElementById('log1').innerHTML = "<h1>" + pos.coords.latitude + "</h1><br><h1>" + pos.coords.longitude + "</h1><br>"
+			}
+
+			function errHa(err) {
+				alert(err);
+			}
+			//拖放
+			function dragstart(ev) {
+				ev.dataTransfer.dropEffect = 'copy'
+				ev.dataTransfer.setData("Text", ev.target.getAttribute('id'))
+				return true
+			}
+
+			function dragEnter(ev) {
+				event.preventDefault();
+				return true;
+			}
+
+			function dragOver(ev) {
+				return false;
+			}
+
+			function dragEnd(ev) {
+				var src = ev.dataTransfer.getData("Text");
+				ev.target.appendChild(document.getElementById(src));
+				ev.stopPropagation();
+				return false
+			}
+		</script>
+	</body>
+
+</html>

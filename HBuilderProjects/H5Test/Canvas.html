@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<script type="text/javascript">
+		var index = 0;
+			function WebSocketTest() {
+				if ("WebSocket" in window) {
+					alert("WebSocket is supported by your Browser!");
+					// Let us open a web socket
+					var ws = new WebSocket("ws://localhost:9988/echo");
+					ws.onopen = function() {
+						// Web Socket is connected, send data using send()
+						ws.send("Message to send");
+						alert("Message is sent...");
+					};
+					ws.onmessage = function(evt) {
+						var received_msg = evt.data;
+						alert("Message is received...");
+					};
+					ws.onclose = function() {
+						// websocket is closed.
+						alert("Connection is closed...");
+					};
+				} else {
+					// The browser doesn't support WebSocket
+					alert("WebSocket NOT supported by your Browser!");
+				}
+			}
+
+			function drawContex1() {
+				var canvas = document.getElementById("cav");
+				if (canvas.getContext) {
+					var ctx = canvas.getContext("2d");
+					ctx.strokeStyle = "aquamarine"
+					ctx.fillStyle = "beige"
+						//阴影
+					ctx.shadowBlur = 2
+					ctx.shadowOffsetX = 2
+					ctx.shadowOffsetY = 2
+					ctx.shadowColor = 'rgba(20,250,66,0.5)'
+						//矩形
+					ctx.fillRect(25, 25, 100, 100);
+					ctx.clearRect(45, 45, 60, 60);
+					ctx.strokeRect(50, 50, 50, 50);
+					//路径
+					ctx.arc(150, 150, 50, 2 * Math.PI, 0, false);
+					ctx.fill();
+					//线条
+					ctx.moveTo(0, 0);
+					ctx.lineTo(150, 150);
+					ctx.moveTo(0, 300);
+					ctx.lineTo(150, 150);
+					ctx.moveTo(150, 150)
+					ctx.lineTo(300, 300)
+						//矩形
+					ctx.rect(0, 0, 100, 100)
+					ctx.fillRect(100, 0, 100, 100);
+					ctx.stroke();
+					//图像
+					var ima = new Image();
+					ima.src = "img/HBuilder.png"
+					ima.onload = function() {
+						ctx.drawImage(ima, 200, 0)
+					}
+					ctx.stroke();
+					//渐变色
+					var lingard = ctx.createLinearGradient(0, 0, 100, 100);
+					lingard.addColorStop(0.8, '#00ABEB');
+					lingard.addColorStop(0.1, '#fff');
+					ctx.fillStyle = lingard
+					ctx.fillRect(0, 0, 100, 100)
+					var gard2 = ctx.createRadialGradient(100, 100, 25, 100, 100, 100)
+					gard2.addColorStop(0.5, '#00ABEB');
+					gard2.addColorStop(0, '#fff');
+					gard2.addColorStop(1, 'rgba(1,159,98,0)');
+					ctx.fillStyle = gard2
+					ctx.fillRect(0, 0, 300, 300)
+					ctx.fill()
+					ctx.translate(100, 0)
+					ctx.rotate(Math.PI / 2)
+					ctx.scale(0.5, 0.5)
+						//文本
+					ctx.fillStyle = 'black'
+					ctx.strokeStyle = 'black'
+					ctx.font = "Italic 30px Sans-Serif"
+					ctx.fillText("Clown", 10, 100, 200)
+					ctx.stroke()
+						//图案
+					var ima2 = new Image();
+					ima2.src = 'image1.jpg'
+					ima2.onload = function() {
+						var patn = ctx.createPattern(ima2, 'repeat')
+						ctx.fillStyle = patn
+						ctx.fillRect(0, 0, 200, 200)
+					}
+				}
+			}
+
+			function drawContex2() {
+//				var canvas = document.getElementById('cav2')
+//				if (canvas.getContext) {
+//					var contex = canvas.getContext('2d')
+//					contex.beginPath()
+//					contex.moveTo(100, 100)
+//					contex.fillStyle = 'red'
+//					contex.arc(100, 100, 50, 0, 2 * Math.PI, false)
+//					contex.fill()
+//					
+//					contex.globalCompositeOperation = 'destination-atop'
+//					contex.beginPath()
+//					contex.fillStyle = 'blue'
+//					contex.moveTo(150, 150)
+//					contex.arc(150, 150, 50, 0, 2 * Math.PI, false)
+//					contex.fill()
+//				}
+				setInterval(animate,200)
+			}
+			function animate(){
+				index++;
+				
+				var canvas = document.getElementById('cav2')
+				if (canvas.getContext) {
+					var contex = canvas.getContext('2d')
+//					contex.clear()
+					contex.fillStyle = 'red'
+					contex.arc(100,100,50,0,index%6.28,false)
+					contex.fill()
+					}
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="sse">
+			<a href="javascript:drawContex1()" style="font-size: 30px; width: 100px; height: 30px; color: darkgoldenrod;">Draw contex1</a>
+		</div>
+		<div id="sse">
+			<a href="javascript:drawContex2()" style="font-size: 30px; width: 100px; height: 30px; color: aquamarine;">Draw Contex2</a>
+		</div>
+
+		<canvas id="cav" width="300" height="300" ; style="border: 2px solid red;" "></canvas>
+		<canvas id="cav2" width="300 " height="300 " ; style="border: 2px solid brown; " "></canvas>
+	</body>
+
+</html>

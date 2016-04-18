@@ -1,0 +1,91 @@
+//
+//  CustomModel.m
+//  KVCDemo
+//
+//  Created by jianghai on 15/10/21.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+#import "CustomModel.h"
+
+@implementation BaseClass
+@end
+
+@interface CustomModel()
+{
+    NSArray* _userList;
+}
+@end
+
+@implementation CustomModel
+//@dynamic userList;
+
+-(void)setNilValueForKey:(NSString *)key
+{
+    NSLog(@"setNilValueForKey:%@",key);
+    if([key isEqualToString:@"hidden"])
+        _hidden = NO;
+}
+-(BOOL)hidden
+{
+    NSLog(@"%s",__func__);
+    return _hidden;
+}
+-(BOOL)isHidden
+{
+    NSLog(@"%s",__func__);
+    return _hidden;
+}
+-(BOOL)validateCount:(id*)inValue error:(out NSError * _Nullable __autoreleasing *)outError
+{
+    NSLog(@"%s",__func__);
+    if(*inValue == nil)
+        return YES;
+    
+    if([*inValue floatValue] < 3){
+        
+        NSNumber* num = [NSNumber numberWithFloat:1];
+        if(num){
+            *inValue = num;
+            return YES;
+        }
+        if(outError != NULL){
+            NSString* errorStr = @"errooooo";
+            NSDictionary* userinfo = @{NSLocalizedDescriptionKey:errorStr};
+            NSError* err = [[NSError alloc] initWithDomain:@"PERSON_ERROR_DOMAIN" code:1 userInfo:userinfo];
+            *outError = err;
+        }
+        return NO;
+    }
+    return YES;
+}
+
+#pragma mark 有序集合
+-(void)setUserList:(NSArray<BaseClass *> *)userList
+{
+    NSLog(@"%s",__func__);
+    _userList = userList;
+}
+-(NSUInteger)countOfUserList
+{
+    NSLog(@"%s",__func__);
+    return _userList.count;
+}
+-(id)objectInUserListAtIndex:(NSUInteger)index
+{
+    NSLog(@"%s",__func__);
+    return [_userList objectAtIndex:index];
+}
+-(void)removeUserListObject:(BaseClass *)object
+{
+    NSLog(@"%s",__func__);
+}
+//-(NSMutableArray *)mutableArrayValueForKey:(NSString *)key
+//{
+//    return nil;
+//}
+//-(NSMutableArray *)mutableArrayValueForKeyPath:(NSString *)keyPath
+//{
+//    return nil;
+//}
+@end
