@@ -1,0 +1,69 @@
+//
+//  CityModel.swift
+//  AppleWatchDemo
+//
+//  Created by jianghai on 15/11/30.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+import Foundation
+
+public struct CityModel {
+    let province_cn : String
+    let district_cn : String
+    let name_cn : String
+    let name_en : String
+    let area_id : String
+    init(province_cn : String,district_cn : String,name_cn : String,name_en : String,area_id : String){
+        self.province_cn = province_cn
+        self.district_cn = district_cn
+        self.name_cn = name_cn
+        self.name_en = name_en
+        self.area_id = area_id
+    }
+}
+
+
+import Foundation
+
+typealias Task = (cancel : Bool) -> ()
+
+func delay(time:NSTimeInterval, task:()->()) ->  Task? {
+    
+    func dispatch_later(block:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(time * Double(NSEC_PER_SEC))),
+            dispatch_get_main_queue(),
+            block)
+    }
+    
+    var closure: dispatch_block_t? = task
+    var result: Task?
+    
+    let delayedClosure: Task = {
+        cancel in
+        if let internalClosure = closure {
+            if (cancel == false) {
+                dispatch_async(dispatch_get_main_queue(), internalClosure);
+            }
+        }
+        closure = nil
+        result = nil
+    }
+    
+    result = delayedClosure
+    
+    dispatch_later {
+        if let delayedClosure = result {
+            delayedClosure(cancel: false)
+        }
+    }
+    
+    return result;
+}
+
+func cancel(task:Task?) {
+    task?(cancel: true)
+}

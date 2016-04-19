@@ -1,0 +1,94 @@
+//
+//  WeatherController.swift
+//  AppleWatch
+//
+//  Created by jianghai on 15/11/12.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+import WatchKit
+import CityKit
+
+
+class WeatherController: WKInterfaceController {
+    
+    static var index = 0
+    @IBOutlet var cityNameLabel: WKInterfaceLabel!
+    @IBOutlet var low: WKInterfaceLabel!
+    @IBOutlet var high: WKInterfaceLabel!
+    
+    var lowTemp : String = ""
+    var highTemp : String = ""
+    
+    var vcIndex = 0
+    var cityName : String?
+    
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        
+        
+        WeatherController.index += 1
+        
+        if WeatherController.index == 2{
+        }
+        
+        
+        vcIndex = WeatherController.index
+        ExtensionDelegate.shareDelegate().allPages.addObject(self)
+        // Configure interface objects here.
+        let image = UIImage(named:"left")
+        self.addMenuItemWithImage(image!, title: "Second", action: Selector("domenuAction:"))
+        
+        self.addMenuItemWithImage(image!, title: "Second", action: Selector("domenuAction:"))
+        self.addMenuItemWithImage(image!, title: "Second", action: Selector("domenuAction:"))
+    }
+    
+    func changeCityName(name : String){
+        //设置字体
+        let font = [NSFontAttributeName : UIFont.systemFontOfSize(30),
+            NSForegroundColorAttributeName : UIColor.greenColor(),]
+        self.cityNameLabel.setAttributedText(NSAttributedString(string: name, attributes:font))
+    }
+    
+    override func handleUserActivity(userInfo: [NSObject : AnyObject]?) {
+        if let info = userInfo{
+            
+            for (key,value) in info{
+                print("key:\(key)__value:\(value)")
+            }
+        }
+    }
+    
+    override func willActivate() {
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        super.didDeactivate()
+    }
+    
+    override func didAppear() {
+        super.didAppear()
+        
+        
+//        /**
+//        *先获取缓存，没有再请求
+//        **/
+//        if let cachedObject : CityModelWeather = WatchExtensionCache.sharedCache.objectForKey(self.cityName!) as? CityModelWeather{
+//            self.low.setText(cachedObject.low)
+//            self.high.setText(String(cachedObject.high))
+//        }else{
+//            
+//            WeatherProvider.shareInstance.requesetWeatcherInfo(self.cityName!) { [unowned self] (city : CityModelWeather? , error : NSError?) -> Void in
+//                if let theCity = city{
+//                    self.low.setText(theCity.low)
+//                    self.high.setText(String(theCity.high))
+//                    WatchExtensionCache.sharedCache.setObject(theCity, forKey: self.cityName!)
+//                }
+//                
+//            }
+//        }
+    }
+}

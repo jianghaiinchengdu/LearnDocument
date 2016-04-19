@@ -1,0 +1,22 @@
+//
+//  CityModel.swift
+//  AppleWatch
+//
+//  Created by jianghai on 15/11/13.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+import Foundation
+
+public class CityModelWeather : NSObject {
+    public var city = ""
+    public var low = ""
+    public var high = ""
+    public override init(){}
+    public init(city : String,low : String , high : String){
+        self.city = city
+        self.low = low
+        self.high = high
+        
+    }
+}

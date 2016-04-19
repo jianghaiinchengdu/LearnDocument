@@ -1,0 +1,142 @@
+//
+//  WeatherProvider.swift
+//  AppleWatchDemo
+//
+//  Created by jianghai on 15/11/26.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+import UIKit
+
+public class WeatherProvider : NSObject,NSXMLParserDelegate {
+    
+    public static let shareInstance : WeatherProvider = {
+        
+        let instance = WeatherProvider()
+        instance.session.configuration.requestCachePolicy = .ReturnCacheDataElseLoad
+        return instance
+    }()
+    
+    let session = NSURLSession.sharedSession()
+    var provincesList : Array<ProvinceModel> = {
+        Array<ProvinceModel>()
+    }()
+    
+    var getProvinceSuccess : ((Array<ProvinceModel>)->Void)?
+    /**
+     请求省列表
+     */
+    public func allProvinceList(successHandler successHandler:(Array<ProvinceModel>)->Void,failedHandler:(NSError?)->Void){
+        let urlString = "http://flash.weather.com.cn/wmaps/xml/china.xml"
+        let url = NSURL(string: urlString)!
+        session.dataTaskWithURL(url) { [unowned self] (data, resopnse, error) -> Void in
+            
+            if error != nil{
+                failedHandler(error)
+            }else{
+                self.getProvinceSuccess = successHandler
+                let parser = NSXMLParser(data: data!)
+                parser.delegate = self
+                parser.parse()
+            }
+            }.resume()
+    }
+    /**
+     获取传入的省或者城市的下一级列表
+     */
+    public func requestavailableCityList(cityName : String , completionHandler:(cityList : Array<CityModel>? , error : NSError?)->Void){
+        let URLString = "http://apis.baidu.com/apistore/weatherservice/citylist?cityname=\(cityName)"
+        let URL = NSURL(string:URLString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
+        
+        let request = NSMutableURLRequest(URL: URL)
+        request.HTTPMethod = "GET"
+        request.addValue("27905327750303adc61e4b0cb78bbe36", forHTTPHeaderField: "apikey")
+        
+        session.dataTaskWithRequest(request) { (data : NSData?, response : NSURLResponse?,error : NSError?) -> Void in
+            let object = try? NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+            if let dictionary = object as? [String : AnyObject]{
+                let cityid = dictionary["retData"] as! NSArray
+                var list = Array<CityModel>()
+                
+                for i in cityid{
+                    let item = i as! Dictionary<String, String>
+                    let aItem = CityModel(province_cn: item["province_cn"]!, district_cn: item["district_cn"]!, name_cn: item["name_cn"]!, name_en: item["name_en"]!, area_id: item["area_id"]!)
+                    list.append(aItem)
+                }
+                completionHandler(cityList: list,error: nil)
+            }
+            }.resume()
+    }
+    /**
+     获取天气
+     */
+    public func requesetWeatcherInfo(CityName:String , completionHandler:(city : CityModelWeather?,error:NSError?)->Void){
+        let URLString = "http://apistore.baidu.com/microservice/cityinfo?cityname=\(CityName)"
+        let URL = NSURL(string:URLString.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())!)!
+        doBaseNetWorkRequest(URL) { [unowned self](data, response, error) -> Void in
+            if error != nil{
+            }else{
+                do{
+                    let object = try NSJSONSerialization.JSONObjectWithData(data!, options: .AllowFragments)
+                    if let dictionary = object as? [String : AnyObject]{
+                        
+                        guard dictionary["errNum"] as! Int != -1 else{
+                            completionHandler(city: nil, error: error)
+                            return
+                        }
+                        
+                        let cityid = dictionary["retData"]!["cityCode"]! as! String
+                        let WeatherURLString = "http://apistore.baidu.com/microservice/weather?cityid=\(cityid)"
+                        let WeatherURL = NSURL(string:WeatherURLString)!
+                        
+                        self.doBaseNetWorkRequest(WeatherURL) { (data, response, error) -> Void in
+                            if error != nil{
+                                completionHandler(city: nil, error: error!)
+                            }else{
+                                let object = try! NSJSONSerialization.JSONObjectWithData(data!, options:.AllowFragments)
+                                if let dictionary = object as? [String: AnyObject] {
+                                    
+                                    let cityName = dictionary["retData"]!["city"]! as! String
+                                    let highTmp = dictionary["retData"]!["h_tmp"]! as! String
+                                    let lowTmp = dictionary["retData"]!["l_tmp"]! as! String
+                                    let cityInfo = CityModelWeather(city: cityName, low: lowTmp, high:highTmp)
+                                    
+                                    completionHandler(city: cityInfo, error: error)
+                                }
+                            }
+                        }
+                    }
+                }catch{
+                    
+                }
+            }
+            
+        }
+    }
+    //MARK:-Delegate of class-
+    
+    private func doBaseNetWorkRequest(url:NSURL,completionHandler : (data : NSData?, response : NSURLResponse? , error : NSError?)->Void)->Void{
+        let task = session.dataTaskWithURL(url) { (data, response, error) -> Void in
+            completionHandler(data: data,response: response,error: error)
+        }
+        task.resume()
+        
+    }
+    
+    //MARK:NSXMLParserDelegate
+    
+    public func parserDidEndDocument(parser: NSXMLParser){
+        if let handler = self.getProvinceSuccess{
+            handler(self.provincesList)
+        }
+    }
+    public func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]){
+        if elementName == "city"{
+            let info = attributeDict as Dictionary
+            let province = ProvinceModel(quName : info["quName"]!,pyName : info["pyName"]!,
+                cityname : info["cityname"]!,stateDetailed : info["stateDetailed"]!,
+                highTmp : info["tem1"]!,lowTmp : info["tem2"]!,windState : info["windState"]!)
+            provincesList.append(province)
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4f90ca0d-a7b3-4e53-92f0-428567e0be76++8027",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "4f90ca0d-a7b3-4e53-92f0-428567e0be76++8027" : {
+
+    },
+    "4f90ca0d-a7b3-4e53-92f0-428567e0be76++7505" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "4f90ca0d-a7b3-4e53-92f0-428567e0be76++8027" : 0,
+    "4f90ca0d-a7b3-4e53-92f0-428567e0be76++7505" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "AA2DF452-9F77-45E3-866B-D4E6FF53907E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "4f90ca0d-a7b3-4e53-92f0-428567e0be76++8027" : "..",
+    "4f90ca0d-a7b3-4e53-92f0-428567e0be76++7505" : "AppleWatchDemo\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "AppleWatchDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "AppleWatchDemo.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.0.36",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4f90ca0d-a7b3-4e53-92f0-428567e0be76++7505"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.0.36",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4f90ca0d-a7b3-4e53-92f0-428567e0be76++8027"
+    }
+  ]
+}

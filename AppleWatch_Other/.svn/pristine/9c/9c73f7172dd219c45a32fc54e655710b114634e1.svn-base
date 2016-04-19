@@ -1,0 +1,53 @@
+//
+//  WKCommunicationProxy.swift
+//  AppleWatchDemo
+//
+//  Created by jianghai on 15/12/1.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+import UIKit
+import WatchConnectivity
+
+class WKCommunicationProxy : NSObject,WCSessionDelegate{
+    
+    static let sharedProxy = { WKCommunicationProxy() }()
+    
+    override init(){
+        super.init()
+        
+        //创建代理对象
+        if WCSession.isSupported() {
+            let session = WCSession.defaultSession()
+            session.delegate = self
+            session.activateSession()
+        }
+    }
+    
+    func sendMessage(message: [String : AnyObject], replyHandler: (([String : AnyObject]) -> Void)?, errorHandler: ((NSError) -> Void)?){
+        
+        WCSession.defaultSession().sendMessage(message, replyHandler: { (replyMessage : [String : AnyObject]) -> Void in
+            
+            replyHandler!(replyMessage)
+            
+            }) { (error : NSError) -> Void in
+                
+                errorHandler!(error)
+        }
+        
+    }
+    
+    func sendMessageData(data: NSData, replyHandler: ((NSData) -> Void)?, errorHandler: ((NSError) -> Void)?){
+        
+    }
+    
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject]){
+        
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        })
+    }
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void){
+        
+    }
+}

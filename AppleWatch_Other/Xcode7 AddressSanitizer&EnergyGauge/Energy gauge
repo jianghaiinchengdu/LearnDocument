@@ -1,0 +1,17 @@
+#Energy gauge
+
+![github logo](Energy gauge1.jpg)
+
+
+###Energy Impact 显示了你 App 的耗电情况
+![github logo](Energy gauge2.jpg)
+
+Utilization 部分显示了当前时刻的 energy impact，右边的 average 是平均值
+
+在底部，有四行分别代表 CPU、网络、位置和后台。每个小方格代表 1 秒的状态，如果这 1 秒钟状态是活跃的，则小方格会被灰色填满。
+
+注意，CPU 和 位置状态始终是活跃状态，而网络活跃一段时间会停 4 ~ 5 秒钟，后台状态则是完全不活跃状态。
+
+按下 Home 键将 App 退到后台，此时将会中止网络和位置状态，而后台状态变成活跃，CPU 始终是活跃状态。
+
+![github logo](Energy gauge3.jpg)

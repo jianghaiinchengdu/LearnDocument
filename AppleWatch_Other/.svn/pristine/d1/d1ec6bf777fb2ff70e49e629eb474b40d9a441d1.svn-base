@@ -1,0 +1,53 @@
+//
+//  TableDelegate.swift
+//  AppleWatchDemo
+//
+//  Created by jianghai on 15/11/30.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+import UIKit
+
+protocol TableProxyDelegate : NSObjectProtocol{
+   func TableView(tableView tableview :UITableView ,didSelecedAtIndex indexPath : NSIndexPath)
+}
+
+class TableProxy : NSObject,UITableViewDataSource,UITableViewDelegate {
+    
+    //MARK:properties
+    weak var delegate : TableProxyDelegate?
+    var dataList : Array<CityModel> = {Array<CityModel>()}()
+    
+    //MARK:UItableView Datasource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return self.dataList.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier("ReusableCellWithIdentifier1")
+        if  cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: "ReusableCellWithIdentifier1")
+        }
+        let city = self.dataList[indexPath.row]
+        
+        cell?.textLabel?.text = city.name_cn
+        cell?.backgroundColor = UIColor.clearColor()
+        cell?.selectionStyle = .None
+        cell?.textLabel?.textAlignment = .Center
+        return cell!
+    }
+    
+    //MARK:UITableViewDelegate
+    internal func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.backgroundColor = UIColor.purpleColor()
+        if let del = self.delegate{
+            del.TableView(tableView: tableView, didSelecedAtIndex: indexPath)
+        }
+    }
+    internal func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath){
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.backgroundColor = UIColor.clearColor()
+    }
+}

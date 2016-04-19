@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>AppleWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>AppleWatchDemo.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>CityKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>Complication - AppleWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Glance - AppleWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>Notification - AppleWatch.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>A000C85D1BFAF6300052DE88</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A000C87F1BFAF7900052DE88</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A000C8AC1BFAF7CA0052DE88</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A000C8DD1BFAF9730052DE88</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A000C9011BFAFE360052DE88</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A0F41DB41BFB0644002FF765</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

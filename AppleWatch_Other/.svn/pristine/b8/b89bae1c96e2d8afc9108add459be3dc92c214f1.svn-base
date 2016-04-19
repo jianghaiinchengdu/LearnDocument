@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Pmf-Ek-CUe">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="9019"/>
+    </dependencies>
+    <scenes>
+        <!--成都-->
+        <scene sceneID="n0l-hJ-EWy">
+            <objects>
+                <controller title="成都" id="Pmf-Ek-CUe" customClass="WeatherController" customModule="AppleWatch_Extension">
+                    <items>
+                        <imageView width="100" height="100" alignment="center" image="cloudy" contentMode="scaleAspectFit" id="Ny6-ff-4pQ"/>
+                        <group width="1" alignment="left" id="QBI-Ra-fdf">
+                            <items>
+                                <label alignment="right" text="最低：" id="vqk-04-QNN"/>
+                                <label alignment="right" text="20" id="5v2-Z0-1J0"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="Fnv-gV-wua">
+                            <items>
+                                <label alignment="right" text="最高：" id="buA-E6-PUt"/>
+                                <label alignment="right" text="20" id="Rmg-km-blD"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="high" destination="Rmg-km-blD" id="Wea-af-loi"/>
+                        <outlet property="low" destination="5v2-Z0-1J0" id="Htb-TX-RPJ"/>
+                        <segue destination="AUv-5t-HM4" kind="relationship" relationship="nextPage" id="xI8-1L-sRc"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-974" y="99"/>
+        </scene>
+        <!--北京-->
+        <scene sceneID="Oha-ok-zwB">
+            <objects>
+                <controller title="北京" id="AUv-5t-HM4" customClass="WeatherController" customModule="AppleWatch_Extension">
+                    <items>
+                        <imageView width="100" height="100" alignment="center" image="cloudy" contentMode="scaleAspectFit" id="U7o-eY-Uh7"/>
+                        <group width="1" alignment="left" id="kir-Sf-vg9">
+                            <items>
+                                <label alignment="right" text="最低：" id="63h-Hb-e42"/>
+                                <label alignment="right" text="20" id="4mq-qT-pFL"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="2ah-fP-b5C">
+                            <items>
+                                <label alignment="right" text="最高：" id="XzM-gf-nc9"/>
+                                <label alignment="right" text="20" id="ByW-3i-VkD"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="high" destination="ByW-3i-VkD" id="AbN-pJ-uXb"/>
+                        <outlet property="low" destination="4mq-qT-pFL" id="Q8h-5Z-ZCZ"/>
+                        <segue destination="zOY-e1-Sxn" kind="relationship" relationship="nextPage" id="3ID-Ec-jSa"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-752" y="99"/>
+        </scene>
+        <!--上海-->
+        <scene sceneID="dLP-Z9-DwZ">
+            <objects>
+                <controller title="上海" id="zOY-e1-Sxn" customClass="WeatherController" customModule="AppleWatch_Extension">
+                    <items>
+                        <imageView width="100" height="100" alignment="center" image="cloudy" contentMode="scaleAspectFit" id="dZx-GQ-7F8"/>
+                        <group width="1" alignment="left" id="WNI-Ma-0eq">
+                            <items>
+                                <label alignment="right" text="最低：" id="1ab-9z-gWD"/>
+                                <label alignment="right" text="20" id="gVQ-o0-u5I"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="bli-wN-XgA">
+                            <items>
+                                <label alignment="right" text="最高：" id="k2p-lA-rwI"/>
+                                <label alignment="right" text="20" id="E5Y-ty-8e4"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="high" destination="E5Y-ty-8e4" id="U2Q-Zc-5jc"/>
+                        <outlet property="low" destination="gVQ-o0-u5I" id="MHx-Tf-A6r"/>
+                        <segue destination="xaE-2o-agE" kind="relationship" relationship="nextPage" id="2Hq-Kp-8y7"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-506" y="99"/>
+        </scene>
+        <!--南京-->
+        <scene sceneID="whe-Up-joW">
+            <objects>
+                <controller title="南京" id="xaE-2o-agE" customClass="WeatherController" customModule="AppleWatch_Extension">
+                    <items>
+                        <imageView width="100" height="100" alignment="center" image="cloudy" contentMode="scaleAspectFit" id="0Vz-vL-3TW"/>
+                        <group width="1" alignment="left" id="nes-QA-ljk">
+                            <items>
+                                <label alignment="right" text="最低：" id="Sx1-Wf-DSy"/>
+                                <label alignment="right" text="20" id="Q9j-xD-yK0"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="TI1-PY-nG8">
+                            <items>
+                                <label alignment="right" text="最高：" id="rD7-24-jya"/>
+                                <label alignment="right" text="20" id="04C-o3-0Jo"/>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="high" destination="04C-o3-0Jo" id="tUc-DJ-fCb"/>
+                        <outlet property="low" destination="Q9j-xD-yK0" id="i0w-Ok-iNC"/>
+                        <segue destination="bJH-83-S5r" kind="relationship" relationship="nextPage" id="MbH-hI-GK3"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-291" y="99"/>
+        </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="BOz-TT-tkC">
+            <objects>
+                <glanceController spacing="0.0" id="0uZ-2p-rRc" customClass="GlanceController" customModule="AppleWatch" customModuleProvider="target">
+                    <items>
+                        <group alignment="left" id="t8f-Gd-c4y">
+                            <items>
+                                <label width="136" height="86" alignment="left" text="New Message" textAlignment="center" id="vd1-5D-fSp">
+                                    <color key="textColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleCallout"/>
+                                </label>
+                            </items>
+                            <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                        </group>
+                        <group alignment="left" id="uCw-4Q-Ouw">
+                            <items>
+                                <imageView width="136" height="122" alignment="left" id="kxD-3a-Tx1"/>
+                            </items>
+                        </group>
+                    </items>
+                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                    <connections>
+                        <outlet property="image" destination="kxD-3a-Tx1" id="HGO-3p-g0z"/>
+                        <outlet property="messageLabel" destination="vd1-5D-fSp" id="ioS-Bu-pTs"/>
+                    </connections>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="-974" y="685"/>
+        </scene>
+        <!--VC1-->
+        <scene sceneID="JVn-cZ-BRG">
+            <objects>
+                <controller identifier="VC1" title="VC1" id="jVJ-Yi-lrs">
+                    <items>
+                        <button width="1" alignment="left" title="Button" id="3aL-pl-VdQ">
+                            <color key="titleColor" red="1" green="0.17127386659999999" blue="0.13925128619999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </button>
+                        <slider width="1" alignment="left" value="1" maximum="3" steps="3" minimumImage="left" maximumImage="right" id="n0v-2g-Ic9"/>
+                    </items>
+                    <connections>
+                        <segue destination="1Bc-8W-EoI" kind="relationship" relationship="nextPage" id="8v4-JK-Kbs"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-661" y="685"/>
+        </scene>
+        <!--VC2-->
+        <scene sceneID="2cB-eG-WzK">
+            <objects>
+                <controller identifier="VC2" title="VC2" id="1Bc-8W-EoI">
+                    <menu key="menu" id="qvg-l9-IKB">
+                        <items>
+                            <menuItem title="first" id="bMP-SV-FXo"/>
+                        </items>
+                    </menu>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-291" y="685"/>
+        </scene>
+        <!--Table Controller-->
+        <scene sceneID="WfV-Kz-dJa">
+            <objects>
+                <controller id="bJH-83-S5r" customClass="TableController" customModule="AppleWatch_Extension">
+                    <items>
+                        <table alignment="left" id="AMC-Hu-6Nh">
+                            <items>
+                                <tableRow identifier="MyRowType" id="One-Dv-CbW" customClass="MyRowType" customModule="AppleWatch_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="3FG-XF-Jpb">
+                                        <items>
+                                            <button width="1" alignment="left" title="Button" id="i2T-A5-JYG">
+                                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <connections>
+                                                    <segue destination="1Bc-8W-EoI" kind="modal" id="CCy-Bw-BdS"/>
+                                                </connections>
+                                            </button>
+                                        </items>
+                                        <color key="backgroundColor" red="0.094117647060000004" green="0.63921568630000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="lebel" destination="i2T-A5-JYG" id="koF-Yk-L70"/>
+                                    </connections>
+                                </tableRow>
+                                <tableRow identifier="MyRowType" id="CZX-9a-CR2" customClass="MyRowType" customModule="AppleWatch_Extension">
+                                    <group key="rootItem" width="1" alignment="left" id="gFF-F5-zdD">
+                                        <items>
+                                            <button width="1" alignment="left" title="Button" id="dEm-Vy-T5S">
+                                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </button>
+                                        </items>
+                                        <color key="backgroundColor" red="0.094117647060000004" green="0.63921568630000003" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </group>
+                                    <connections>
+                                        <outlet property="lebel" destination="dEm-Vy-T5S" id="akK-kd-K1t"/>
+                                        <segue destination="1Bc-8W-EoI" kind="push" id="NoP-gA-135"/>
+                                    </connections>
+                                </tableRow>
+                            </items>
+                            <color key="backgroundColor" red="1" green="0.0" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </table>
+                    </items>
+                    <menu key="menu" id="r1u-Cg-kfi">
+                        <items>
+                            <menuItem title="Menu Item" image="left" id="guG-In-hwg">
+                                <connections>
+                                    <action selector="firstItemAction" destination="bJH-83-S5r" id="xB5-BE-cVw"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="table" destination="AMC-Hu-6Nh" id="kTc-It-oRi"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="-291" y="374"/>
+        </scene>
+        <!--Static Notification Interface Controller-->
+        <scene sceneID="AEw-b0-oYE">
+            <objects>
+                <notificationController id="YCC-NB-fut">
+                    <items>
+                        <label alignment="left" text="Alert Label" id="XkS-y5-khE"/>
+                    </items>
+                    <notificationCategory key="notificationCategory" identifier="MyNotification" id="JfB-70-Muf">
+                        <color key="sashColor" red="1" green="0.12305778439999999" blue="0.26104668409999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </notificationCategory>
+                    <connections>
+                        <outlet property="notificationAlertLabel" destination="XkS-y5-khE" id="49B-RR-99y"/>
+                        <segue destination="gdX-wl-uQE" kind="relationship" relationship="dynamicNotificationInterface" id="fKh-qV-3T2"/>
+                    </connections>
+                </notificationController>
+            </objects>
+            <point key="canvasLocation" x="-974" y="923"/>
+        </scene>
+        <!--Notification Controller-->
+        <scene sceneID="KIl-fV-djm">
+            <objects>
+                <controller id="gdX-wl-uQE" customClass="NotificationController" customModule="AppleWatch" customModuleProvider="target"/>
+            </objects>
+            <point key="canvasLocation" x="-694" y="923"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="NoP-gA-135"/>
+    </inferredMetricsTieBreakers>
+    <color key="tintColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+</document>

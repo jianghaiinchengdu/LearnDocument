@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "℃"; ObjectID = "CVm-ld-cEJ"; */
+"CVm-ld-cEJ.text" = "℃";
+
+/* Class = "UILabel"; text = "℃"; ObjectID = "TEA-hS-WjZ"; */
+"TEA-hS-WjZ.text" = "℃";
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "Y3L-Y8-Et4"; */
+"Y3L-Y8-Et4.normalTitle" = "Button";
+
+/* Class = "UILabel"; text = "最高"; ObjectID = "dDp-Zk-R2E"; */
+"dDp-Zk-R2E.text" = "最高";
+
+/* Class = "UILabel"; text = "最低"; ObjectID = "vEW-V6-DtG"; */
+"vEW-V6-DtG.text" = "最低";

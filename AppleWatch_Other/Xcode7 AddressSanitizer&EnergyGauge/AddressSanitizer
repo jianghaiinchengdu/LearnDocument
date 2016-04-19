@@ -1,0 +1,65 @@
+#Address Sanitizer(ASan)
+-
+
+##Introduction
+AddressSanitizer 是一个快速的内存错误探测器。 它由一个编译检测模块和一个运行时库组成。它可以检测到一下类型的bug:
+
+* Out-of-bounds accesses to heap, stack and globals
+* Use-after-free
+* Use-after-return (to some extent)//未测试
+* Double-free, invalid free
+* Memory leaks (experimental)//未测试
+
+Address Sanitizer重写了malloc和free,是一种非常高效的内存检查方式,使用Address Sanitizer后程序执行仅仅慢了两倍。
+
+AddressSanitizer是一对工具：首先是编译扩展，然后是运行库。ASan的运行库会分配一个影子内存：一个超大块的内存，用于为每8字节内存记录一字节信息。默认情况下，所有内存的影子字节会被设置为0，表明它不能被访问。当内存被分配后，影子字节设置为其它值（用于记录字的哪些字节被分配、谁分配了它们），它还会重载分配器来跟踪内存的分配和释放。
+
+这样，每次发生内存访问时，运行库将检查相应影子字节的值，如果访问是不被允许的，ASan就会中止程序的执行： ASan在第一个错误发生时崩溃程序，它强制程序必须是ASan检查通过的。
+
+编译扩展的主要作用是将对内存的每一次访问封装在一个小分支中，通过检查影子内存的内容确认访问是否允许。不过因为是在编译器中进行处理，所以它可以访问大量的信息，比如正在访问什么内存，变量或结构体成员的布局是怎样的，…并且它还能可以改变这些。这正是ASan让人眼前一亮的地方：它可以在全局的变量间或栈上的变量间添加红色区域，使得对这些变量的错误访问更容易被检查到。
+
+#用法
+
+使用-fsanitize=address 简单的编译链接你的程序。AdressSanitizer运行时库应当最后被被链接,所以确保在链接的最后一步使用clang(not ld)。当链接共享的库文件的时候，Address Sanitizer 运行时库不会被链接，因此,-wl,-z,defs可能会引起链接错误（不要和Address Sanitizer一起使用这些命令）。为了获取合理的性能,可以添加-o1或者更高的编译参数.
+
+
+```
+% clang -fsanitize=address  main.c
+
+```
+
+__fno-omit-frame-pointer__:可以获得更加详细的信息
+
+
+
+If a bug is detected, the program will print an error message to stderr and exit with a non-zero exit code. AddressSanitizer exits on the first detected error. This is by design:
+
+* This approach allows AddressSanitizer to produce faster and smaller generated code (both by ~5%).
+* Fixing bugs becomes unavoidable. AddressSanitizer does not produce false alarms. Once a memory corruption occurs, the program is in an inconsistent state, which could lead to confusing results and potentially misleading subsequent reports.
+
+如果你的进程是在OSX 10.10及以后的沙盒环境中运行,你需要设置DYLD_INSERT_LIBRARIES环境变量,并将它指向和编译器打包在一起的ASan库。
+
+##符号化输出
+
+为了让AddressSanitizer将其输出符号化为你需要的内容，你需要将`ASAN_SYMBOLIZER_PATH`环境变量设置为为llvm-symbolizer库(或者将llvm-symbolizer加到你的$PATH中)。
+
+```
+% ASAN_SYMBOLIZER_PATH=/usr/local/bin/llvm-symbolizer ./a.out
+```
+
+如果这个没有效果,你可以使用一个单独的脚本来离线的解析你的输出结果。(在线解析可以使用 ASAN_OPTIONS=symbolize=0 来强制禁用)。
+
+```
+% ASAN_OPTIONS=symbolize=0 ./a.out 2> log
+% projects/compiler-rt/lib/asan/scripts/asan_symbolize.py / < log | c++filt
+```
+
+Note:在OSX中你可能需要运行dsymutil。(Note that on OS X you may need to run dsymutil on your binary to have the file:line info in the AddressSanitizer reports.)
+
+
+
+
+Example:
+
+![github logo](AddressSanitizer1.png)
+![github logo](AddressSanitizer2.png)

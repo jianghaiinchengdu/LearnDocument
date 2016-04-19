@@ -1,0 +1,19 @@
+//
+//  ProvinceModel.swift
+//  AppleWatchDemo
+//
+//  Created by jianghai on 15/11/30.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+import Foundation
+
+public struct ProvinceModel {
+    let quName : String
+    let pyName : String
+    let cityname : String
+    let stateDetailed : String
+    let highTmp : String
+    let lowTmp : String
+    let windState : String
+}

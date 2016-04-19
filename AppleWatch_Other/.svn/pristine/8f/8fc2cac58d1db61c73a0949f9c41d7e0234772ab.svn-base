@@ -1,0 +1,20 @@
+//
+//  WatchExtensionCache.swift
+//  AppleWatchDemo
+//
+//  Created by jianghai on 15/11/27.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+import Foundation
+
+class WatchExtensionCache : NSCache {
+    
+    /**
+     单例获取
+    */
+    static let sharedCache : WatchExtensionCache = {
+        return WatchExtensionCache()
+    }()
+    
+}

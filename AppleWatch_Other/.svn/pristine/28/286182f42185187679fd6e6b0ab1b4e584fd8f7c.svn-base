@@ -1,0 +1,175 @@
+//
+//  AddCityController.swift
+//  AppleWatchDemo
+//
+//  Created by jianghai on 15/11/27.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+import UIKit
+
+
+struct NormalCity {
+    var cityName : String
+    var cityID : String
+}
+class AddCityController: UIViewController,UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,TableProxyDelegate {
+    
+    //MARK:properties
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var table1: UITableView!
+    @IBOutlet weak var table2: UITableView!
+    @IBOutlet weak var table3: UITableView!
+    @IBOutlet weak var addButton: UIButton!
+    
+    var dismissHandler : ((city : CityModel)->Void)?
+    let table2Delegate = TableProxy()
+    let table3Delegate = TableProxy()
+    var dataList : Array<ProvinceModel> = {
+        Array<ProvinceModel>()
+    }()
+    var choosedCity : CityModel?
+    
+    
+    static func showInSuperView(superView : UIViewController ,withHandler handler:(city : CityModel?)->Void){
+        let story = UIStoryboard(name: "Main", bundle: nil)
+        let addViewController = story.instantiateViewControllerWithIdentifier("AddCityController") as! AddCityController
+        
+        addViewController.dismissHandler = handler
+        superView.presentViewController(addViewController, animated: true) { () -> Void in
+            
+        }
+    }
+    
+    //MARK:ViewController methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.addButton.layer.cornerRadius = 5
+        self.addButton.hidden = true
+        table1.delegate = self
+        table1.dataSource = self
+        table2.delegate = table2Delegate
+        table2.dataSource = table2Delegate
+        table2Delegate.delegate = self
+        table3Delegate.delegate = self
+        
+        table3.delegate = table3Delegate
+        table3.dataSource = table3Delegate
+        table1.separatorStyle = .None
+        table2.separatorStyle = .None
+        table3.separatorStyle = .None
+        
+        WeatherProvider.shareInstance.allProvinceList(successHandler: { [unowned self] (list : Array<ProvinceModel>) -> Void in
+            self.dataList = list
+            
+            dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                
+                self.table1.reloadData()
+            })
+            
+            }, failedHandler: { (error : NSError?) -> Void in
+        })
+        
+    }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    //MARK:UItableView Datasource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+        return self.dataList.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        
+        var cell = tableView.dequeueReusableCellWithIdentifier("ReusableCellWithIdentifier")
+        if  cell == nil {
+            cell = UITableViewCell(style: .Default, reuseIdentifier: "ReusableCellWithIdentifier")
+        }
+        let province = self.dataList[indexPath.row]
+        
+        cell?.textLabel?.text = province.quName
+        cell?.selectionStyle = .None
+        cell?.backgroundColor = UIColor.clearColor()
+        cell?.textLabel?.textAlignment = .Center
+        return cell!
+    }
+    
+    //MARK:UITableViewDelegate
+    internal func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.backgroundColor = UIColor.purpleColor()
+        
+        let province = self.dataList[indexPath.row]
+        self.table3Delegate.dataList.removeAll()
+        self.addButton.hidden = true
+        self.table3.reloadData()
+        WeatherProvider.shareInstance.requestavailableCityList(province.quName) { [unowned self] (cityList, error) -> Void in
+            
+            var allDistrict = Array<CityModel>()
+            
+            for city : CityModel in cityList!{
+                if city.district_cn == city.name_cn{
+                    allDistrict.append(city)
+                }
+            }
+            self.table2Delegate.dataList = allDistrict
+            dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                
+                self.table2.reloadData()
+            })
+        }
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath){
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.backgroundColor = UIColor.clearColor()
+    }
+    
+    //MARK:TableProxyDelegate
+    func TableView(tableView tableview :UITableView ,didSelecedAtIndex indexPath : NSIndexPath){
+        if tableview == table2{
+            self.addButton.hidden = true
+            let district = table2Delegate.dataList[indexPath.row]
+            WeatherProvider.shareInstance.requestavailableCityList(district.district_cn) { [unowned self] (cityList, error) -> Void in
+                
+                self.table3Delegate.dataList = cityList!
+                dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                    
+                    self.table3.reloadData()
+                })
+            }
+        }else{
+            self.addButton.hidden = false
+            self.choosedCity = table3Delegate.dataList[indexPath.row]
+        }
+    }
+    //MARK:UITextFieldDelegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool{
+        return true
+    }
+    
+    //MARK:add Action
+    @IBAction func addAction(sender: UIButton) {
+        if let handler = self.dismissHandler{
+            if let city = self.choosedCity{
+                self.dismissViewControllerAnimated(true, completion: { () -> Void in
+                    handler(city: city)
+                })
+            }
+        }
+    }
+    /*
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    // Get the new view controller using segue.destinationViewController.
+    // Pass the selected object to the new view controller.
+    }
+    */
+    
+}

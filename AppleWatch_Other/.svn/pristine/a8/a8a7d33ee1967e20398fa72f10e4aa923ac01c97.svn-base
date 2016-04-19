@@ -1,0 +1,145 @@
+//
+//  ViewController.swift
+//  AppleWatch
+//
+//  Created by jianghai on 15/11/6.
+//  Copyright © 2015年 jianghai. All rights reserved.
+//
+
+import UIKit
+
+class ViewController: UIViewController,UIPageViewControllerDataSource , UIPageViewControllerDelegate{
+    
+    @IBOutlet weak var addButton: UIButton!
+    var pageController : PageController!
+    var allPage = Array<CommonController>()
+    var weathers = [CityModelWeather(city: "成都", low: "-", high: "-")]
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let vc = allPage[0] 
+        let cityModel = self.weathers[0]
+        vc.cityLabel.text = cityModel.city
+        vc.high.text = String(cityModel.high)
+        vc.low.text = String(cityModel.low)
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        pageController = PageController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
+        
+        for i in 0..<self.weathers.count{
+            
+            let story = UIStoryboard(name: "Main", bundle: nil)
+            let controller = story.instantiateViewControllerWithIdentifier("CommonController") as! CommonController
+            controller.title = String(i)
+            allPage.append(controller)
+        }
+        
+        
+        self.pageController.setViewControllers(allPage, direction: .Forward, animated: false, completion: nil)
+        self.pageController.dataSource = self
+        self.pageController.delegate = self
+        self.addChildViewController(pageController)
+        self.view.addSubview(pageController!.view)
+        self.view.bringSubviewToFront(self.addButton)
+        
+        WeatherProvider.shareInstance.requesetWeatcherInfo("成都") {[unowned self] (city, error) -> Void in
+            self.weathers[0] = city!
+            let vc = self.pageController.viewControllers![0] as! CommonController
+            
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            vc.cityLabel.text = city!.city
+            vc.high.text = String(city!.high)
+            vc.low.text = String(city!.low)
+            })
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
+    @IBAction func addNewCity(sender: AnyObject) {
+        AddCityController.showInSuperView(self) { (city : CityModel?) -> Void in
+            
+//            let indicator = UIActivityIndicatorView(frame: UIScreen.mainScreen().bounds )
+//            self.view.addSubview(indicator);
+//            indicator.startAnimating()
+            
+            WeatherProvider.shareInstance.requesetWeatcherInfo(city!.name_cn, completionHandler: {[unowned self] (cityModel, error) -> Void in
+                
+                if let weatherModel = cityModel{
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        
+                        let story = UIStoryboard(name: "Main", bundle: nil)
+                        let controller = story.instantiateViewControllerWithIdentifier("CommonController") as! CommonController
+                        controller.title = String(self.allPage.count)
+                        
+                        self.allPage.append(controller)
+                        self.weathers.append(weatherModel)
+                        
+//                        indicator.stopAnimating()
+                        
+                        self.pageController.setViewControllers([controller], direction: .Forward, animated: true, completion: nil)
+                        
+                        controller.cityLabel.text = weatherModel.city
+                        controller.high.text = String(weatherModel.high)
+                        controller.low.text = String(weatherModel.low)
+                    })
+                }
+                })
+            
+        }
+    }
+    
+    
+    //MARK:PageViewControllerDelegate
+    func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController?{
+        let index = Int(viewController.title!)
+        if index > 0{
+            let vc = allPage[index! - 1]
+            return vc
+        }else{
+            
+            return nil
+        }
+    }
+    func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController?{
+        let index = Int(viewController.title!)
+        if index < allPage.count - 1{
+            return allPage[(index! + 1)]
+        }else{
+            
+            return nil
+        }
+    }
+//    func pageViewController(pageViewController: UIPageViewController, willTransitionToViewControllers pendingViewControllers: [UIViewController])
+//    {
+//        let viewController = pendingViewControllers[0] as! CommonController
+//        let index = Int(viewController.title!)
+//        
+//        let cityModel = self.weathers[index!]
+//        let message : [String : AnyObject] = ["city":cityModel.city,"low":cityModel.low,"high":cityModel.high]
+//        WKCommunicationProxy.sharedProxy.sendMessage(message, replyHandler: { (replyMessage : [String : AnyObject]) -> Void in
+//            
+//            }) { (error : NSError) -> Void in
+//        }
+//
+//    }
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool){
+        let viewController = previousViewControllers[0] as! CommonController
+        let index = Int(viewController.title!)! + 1
+        
+        let cityModel = self.weathers[index]
+        let message : [String : AnyObject] = ["city":cityModel.city,"low":cityModel.low,"high":cityModel.high]
+        WKCommunicationProxy.sharedProxy.sendMessage(message, replyHandler: { (replyMessage : [String : AnyObject]) -> Void in
+            
+            }) { (error : NSError) -> Void in
+        }
+    }
+}
+
