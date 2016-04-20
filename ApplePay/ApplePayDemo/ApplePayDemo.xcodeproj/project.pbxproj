@@ -13,6 +13,7 @@
 		A02C0CDD1CC4DBEC00F2CAE3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02C0CDB1CC4DBEC00F2CAE3 /* Main.storyboard */; };
 		A02C0CDF1CC4DBEC00F2CAE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02C0CDE1CC4DBEC00F2CAE3 /* Assets.xcassets */; };
 		A02C0CE21CC4DBEC00F2CAE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02C0CE01CC4DBEC00F2CAE3 /* LaunchScreen.storyboard */; };
+		A0DCC41C1CC781FE00638AC5 /* ApplePayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC41B1CC781FE00638AC5 /* ApplePayManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		A02C0CDE1CC4DBEC00F2CAE3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A02C0CE11CC4DBEC00F2CAE3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A02C0CE31CC4DBEC00F2CAE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0DCC41A1CC781FE00638AC5 /* ApplePayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplePayManager.h; sourceTree = "<group>"; };
+		A0DCC41B1CC781FE00638AC5 /* ApplePayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplePayManager.m; sourceTree = "<group>"; };
 		A0E1B5ED1CC5DC4D008EBA05 /* ApplePayDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ApplePayDemo.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +72,8 @@
 				A02C0CE01CC4DBEC00F2CAE3 /* LaunchScreen.storyboard */,
 				A02C0CE31CC4DBEC00F2CAE3 /* Info.plist */,
 				A02C0CD21CC4DBEC00F2CAE3 /* Supporting Files */,
+				A0DCC41A1CC781FE00638AC5 /* ApplePayManager.h */,
+				A0DCC41B1CC781FE00638AC5 /* ApplePayManager.m */,
 			);
 			path = ApplePayDemo;
 			sourceTree = "<group>";
@@ -160,6 +165,7 @@
 				A02C0CDA1CC4DBEC00F2CAE3 /* ViewController.m in Sources */,
 				A02C0CD71CC4DBEC00F2CAE3 /* AppDelegate.m in Sources */,
 				A02C0CD41CC4DBEC00F2CAE3 /* main.m in Sources */,
+				A0DCC41C1CC781FE00638AC5 /* ApplePayManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
