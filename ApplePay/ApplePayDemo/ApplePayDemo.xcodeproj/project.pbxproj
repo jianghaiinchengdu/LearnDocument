@@ -14,6 +14,10 @@
 		A02C0CDF1CC4DBEC00F2CAE3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A02C0CDE1CC4DBEC00F2CAE3 /* Assets.xcassets */; };
 		A02C0CE21CC4DBEC00F2CAE3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A02C0CE01CC4DBEC00F2CAE3 /* LaunchScreen.storyboard */; };
 		A0DCC41C1CC781FE00638AC5 /* ApplePayManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A0DCC41B1CC781FE00638AC5 /* ApplePayManager.m */; };
+		A0EF07401CC8D9B100CA45E5 /* libUPAPayPlugin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EF073F1CC8D9B100CA45E5 /* libUPAPayPlugin.a */; };
+		A0EF07421CC8DA0600CA45E5 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EF07411CC8DA0600CA45E5 /* libz.tbd */; };
+		A0EF07441CC8DA0D00CA45E5 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EF07431CC8DA0D00CA45E5 /* SystemConfiguration.framework */; };
+		A0EF07461CC8DA2600CA45E5 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A0EF07451CC8DA2600CA45E5 /* libc++.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,12 @@
 		A0DCC41A1CC781FE00638AC5 /* ApplePayManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplePayManager.h; sourceTree = "<group>"; };
 		A0DCC41B1CC781FE00638AC5 /* ApplePayManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplePayManager.m; sourceTree = "<group>"; };
 		A0E1B5ED1CC5DC4D008EBA05 /* ApplePayDemo.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ApplePayDemo.entitlements; sourceTree = "<group>"; };
+		A0EF073C1CC8D9B100CA45E5 /* UPAPayPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPAPayPlugin.h; sourceTree = "<group>"; };
+		A0EF073D1CC8D9B100CA45E5 /* UPAPayPluginDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UPAPayPluginDelegate.h; sourceTree = "<group>"; };
+		A0EF073F1CC8D9B100CA45E5 /* libUPAPayPlugin.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libUPAPayPlugin.a; sourceTree = "<group>"; };
+		A0EF07411CC8DA0600CA45E5 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		A0EF07431CC8DA0D00CA45E5 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A0EF07451CC8DA2600CA45E5 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +47,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0EF07461CC8DA2600CA45E5 /* libc++.tbd in Frameworks */,
+				A0EF07441CC8DA0D00CA45E5 /* SystemConfiguration.framework in Frameworks */,
+				A0EF07421CC8DA0600CA45E5 /* libz.tbd in Frameworks */,
+				A0EF07401CC8D9B100CA45E5 /* libUPAPayPlugin.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +60,9 @@
 		A02C0CC61CC4DBEC00F2CAE3 = {
 			isa = PBXGroup;
 			children = (
+				A0EF07451CC8DA2600CA45E5 /* libc++.tbd */,
+				A0EF07431CC8DA0D00CA45E5 /* SystemConfiguration.framework */,
+				A0EF07411CC8DA0600CA45E5 /* libz.tbd */,
 				A02C0CD11CC4DBEC00F2CAE3 /* ApplePayDemo */,
 				A02C0CD01CC4DBEC00F2CAE3 /* Products */,
 			);
@@ -62,6 +79,7 @@
 		A02C0CD11CC4DBEC00F2CAE3 /* ApplePayDemo */ = {
 			isa = PBXGroup;
 			children = (
+				A0EF073A1CC8D9B100CA45E5 /* UPAPaySDK */,
 				A0E1B5ED1CC5DC4D008EBA05 /* ApplePayDemo.entitlements */,
 				A02C0CD51CC4DBEC00F2CAE3 /* AppDelegate.h */,
 				A02C0CD61CC4DBEC00F2CAE3 /* AppDelegate.m */,
@@ -84,6 +102,32 @@
 				A02C0CD31CC4DBEC00F2CAE3 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A0EF073A1CC8D9B100CA45E5 /* UPAPaySDK */ = {
+			isa = PBXGroup;
+			children = (
+				A0EF073B1CC8D9B100CA45E5 /* inc */,
+				A0EF073E1CC8D9B100CA45E5 /* libs */,
+			);
+			path = UPAPaySDK;
+			sourceTree = "<group>";
+		};
+		A0EF073B1CC8D9B100CA45E5 /* inc */ = {
+			isa = PBXGroup;
+			children = (
+				A0EF073C1CC8D9B100CA45E5 /* UPAPayPlugin.h */,
+				A0EF073D1CC8D9B100CA45E5 /* UPAPayPluginDelegate.h */,
+			);
+			path = inc;
+			sourceTree = "<group>";
+		};
+		A0EF073E1CC8D9B100CA45E5 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				A0EF073F1CC8D9B100CA45E5 /* libUPAPayPlugin.a */,
+			);
+			path = libs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -283,8 +327,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ApplePayDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ApplePayDemo/LLAPPaySDK",
+					"$(PROJECT_DIR)/ApplePayDemo/UPAPaySDK/libs",
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mll.mllcustomer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -299,8 +349,14 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ApplePayDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ApplePayDemo/LLAPPaySDK",
+					"$(PROJECT_DIR)/ApplePayDemo/UPAPaySDK/libs",
+				);
+				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mll.mllcustomer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

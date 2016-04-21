@@ -7,8 +7,9 @@
 //
 
 #import "ApplePayManager.h"
+#import "UPAPayPlugin.h"
 
-@interface ApplePayManager()<PKPaymentAuthorizationViewControllerDelegate>
+@interface ApplePayManager()<PKPaymentAuthorizationViewControllerDelegate , UPAPayPluginDelegate>
 @property (nullable ,nonatomic , strong)NSMutableArray *summaryItems;
 @property (nullable ,nonatomic , strong)NSMutableArray <PKShippingMethod *> *shipingMethod;
 @property (nonnull ,nonatomic , strong)NSArray *supportedNetworks;
@@ -21,7 +22,7 @@
     static ApplePayManager* _instance = nil;
     dispatch_once(&onceToken, ^{
         _instance = [[ApplePayManager alloc] init];
-        _instance.supportedNetworks = @[PKPaymentNetworkAmex, PKPaymentNetworkMasterCard,PKPaymentNetworkVisa,PKPaymentNetworkChinaUnionPay];
+        _instance.supportedNetworks = @[PKPaymentNetworkAmex, PKPaymentNetworkMasterCard,PKPaymentNetworkVisa];
     });
     return _instance;
 }
@@ -34,6 +35,11 @@
         view.delegate = self;
         [target presentViewController:view animated:YES completion:nil];
     }
+}
+
+-(BOOL)presentUPAPayVC:(UIViewController *)target withOrdersInfo:(NSArray<NSObject<PaymentSummaryData> *> *)order {
+    NSString* payInfo = @"201511181055564938258";//这个地方将订单发送至自己的服务器，生成订单支付信息
+    return [UPAPayPlugin startPay:payInfo mode:@"01" viewController:target delegate:self andAPMechantID:@"merchant.com.mll.mllcustomer"];
 }
 
 -(BOOL)canBeginPayProcess {
@@ -60,16 +66,16 @@
 -(PKPaymentRequest *)createRequestWithOrders:(NSArray<NSObject<PaymentSummaryData> *> *)orders {
     
     PKPaymentRequest *paymentRequest = [[PKPaymentRequest alloc] init];
-    paymentRequest.countryCode = @"CN";
-    paymentRequest.currencyCode = @"CNY";
-    paymentRequest.merchantIdentifier = @"merchant.com.mll.mllcustomer";
+    paymentRequest.countryCode = @"CN";//国家代码
+    paymentRequest.currencyCode = @"CNY";//货币代码
+    paymentRequest.merchantIdentifier = @"merchant.com.mll.mllcustomer";//后台申请的商人ID
     paymentRequest.supportedNetworks = self.supportedNetworks;
-    paymentRequest.merchantCapabilities = PKMerchantCapability3DS|PKMerchantCapabilityEMV;
+    paymentRequest.merchantCapabilities = PKMerchantCapability3DS|PKMerchantCapabilityEMV;//交易的处理协议
     
-    // payRequest.requiredBillingAddressFields = PKAddressFieldEmail;
+    paymentRequest.requiredBillingAddressFields = PKAddressFieldAll;
     //如果需要邮寄账单可以选择进行设置，默认PKAddressFieldNone(不邮寄账单)
     //楼主感觉账单邮寄地址可以事先让用户选择是否需要，否则会增加客户的输入麻烦度，体验不好，
-    paymentRequest.requiredShippingAddressFields = PKAddressFieldPhone|PKAddressFieldPostalAddress|PKAddressFieldName;
+    paymentRequest.requiredShippingAddressFields = PKAddressFieldAll;
     //送货地址信息，这里设置需要地址和联系方式和姓名，如果需要进行设置，默认PKAddressFieldNone(没有送货地址)
     
     
@@ -110,6 +116,16 @@
     
     return paymentRequest;
 }
+
+#pragma mark
+#pragma mark UPAPayPluginDelegate
+
+-(void) UPAPayPluginResult:(UPPayResult *) payResult {
+    NSLog(@"sdfdsfsdfdsf");
+}
+
+#pragma mark
+#pragma mark PKPaymentAuthorizationViewControllerDelegate
 
 // Sent to the delegate after the user has acted on the payment request.  The application
 // should inspect the payment to determine whether the payment request was authorized.

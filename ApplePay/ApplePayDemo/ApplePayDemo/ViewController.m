@@ -20,7 +20,11 @@
 }
 - (IBAction)payment:(id)sender {
     
-    [[ApplePayManager sharedManager] presentPayVCFrom:self withOrdersInfo:nil];
+//    [[ApplePayManager sharedManager] presentPayVCFrom:self withOrdersInfo:nil];
+}
+
+- (IBAction)payWithUPA:(id)sender {
+   [[ApplePayManager sharedManager] presentUPAPayVC:self withOrdersInfo:nil];
 }
 
 - (void)didReceiveMemoryWarning {

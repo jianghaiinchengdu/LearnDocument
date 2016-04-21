@@ -21,6 +21,8 @@
 
 +(ApplePayManager *)sharedManager;
 
--(void)presentPayVCFrom:(UIViewController *)target withOrdersInfo:(NSArray<NSObject<PaymentSummaryData> *> *)order;
+//-(void)presentPayVCFrom:(UIViewController *)target withOrdersInfo:(NSArray<NSObject<PaymentSummaryData> *> *)order;
+
+-(BOOL)presentUPAPayVC:(UIViewController *)target withOrdersInfo:(NSArray<NSObject<PaymentSummaryData> *> *)order;
 
 @end
