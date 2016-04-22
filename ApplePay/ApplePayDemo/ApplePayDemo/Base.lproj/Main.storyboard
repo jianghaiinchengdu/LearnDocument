@@ -38,7 +38,6 @@
                                 <state key="normal" title="银联处理"/>
                                 <connections>
                                     <action selector="payWithUPA:" destination="BYZ-38-t0r" eventType="touchUpInside" id="U61-ed-fpo"/>
-                                    <action selector="payment:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hQy-Zf-vKO"/>
                                 </connections>
                             </button>
                         </subviews>

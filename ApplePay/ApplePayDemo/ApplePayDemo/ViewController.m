@@ -20,7 +20,7 @@
 }
 - (IBAction)payment:(id)sender {
     
-//    [[ApplePayManager sharedManager] presentPayVCFrom:self withOrdersInfo:nil];
+    [[ApplePayManager sharedManager] presentPayVCFrom:self withOrdersInfo:nil];
 }
 
 - (IBAction)payWithUPA:(id)sender {
@@ -31,6 +31,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end
